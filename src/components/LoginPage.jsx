@@ -3,6 +3,7 @@ import './AuthForm.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import illustration from '../assets/signin_illustration.png'; 
+import dotenv from 'dotenv';
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +13,7 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/login', { email, password });
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/login`, { email, password });
             localStorage.setItem('token', response.data.token);
             navigate('/profile');
         } catch (err) {
