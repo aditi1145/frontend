@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SignupForm.css';
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -25,14 +26,14 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    await axios.post('http://localhost:5000/api/signup', formData);
+    await axios.post(`${process.env.BASE_URL}/api/signup`, formData);
     alert("Data posted to backend!");
     setOtpSubmit(true);
   };
 
   const submitOtp = async(e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/verify-otp", formData)
+    axios.post(`${process.env.BASE_URL}/api/verify-otp`, formData)
     .then(() => {
       alert(`Otp Verified!`);
       window.location = '/login'
