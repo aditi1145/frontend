@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { json } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import dotenv from 'dotenv';
 const ProfilePage = () => {
     const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ const ProfilePage = () => {
         const token = localStorage.getItem('token');
         console.log(token);
         axios
-            .get('http://localhost:5000/api/profile', {
+            .get(`${process.env.BASE_URL}/api/profile`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
